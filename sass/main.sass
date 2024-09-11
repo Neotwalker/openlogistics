@@ -1,0 +1,1027 @@
+@use 'sass:math'
+@use 'sass:color'
+
+@import "fonts"
+@import "libs"
+@import "vars"
+
+*
+	-webkit-box-sizing: border-box
+	-moz-box-sizing: border-box
+	box-sizing: border-box
+	margin: 0
+	padding: 0
+	font-family: $default-font
+	&:before, &:after
+		-webkit-box-sizing: border-box
+		-moz-box-sizing: border-box
+		box-sizing: border-box
+
+*::-webkit-input-placeholder
+	color: #666
+	opacity: 1
+
+*:-moz-placeholder
+	color: #666
+	opacity: 1
+
+*::-moz-placeholder
+	color: #666
+	opacity: 1
+
+*:-ms-input-placeholder
+	color: #666
+	opacity: 1
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+	color: #666
+body input:required:valid,
+body textarea:required:valid
+	color: #666
+
+html, body
+	overflow-x: hidden
+	background-color: $white
+	scroll-behavior: smooth
+	&.overflow 
+		overflow: hidden
+		margin-right: 0
+
+body
+	height: 100%
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	line-height: 1.35
+	font-family: $default-font
+	overflow-x: hidden
+
+_:-webkit-any-link,
+body.overflow
+	margin-right: 17px
+
+section, .section 
+	&:not(:last-child)
+		margin-bottom: 120px
+
+.img-responsive
+	display: block
+	max-width: 100%
+	height: auto
+
+img
+	max-width: 100%
+	object-fit: cover
+
+::selection
+	background-color: $accent
+	color: #fff
+
+.container
+	max-width: 1480px
+	width: 100%
+	margin: 0 auto
+	.row 
+		padding-left: 20px
+		padding-right: 20px
+
+.h1, h1
+	font-size: 58px
+	line-height: 72px
+	font-weight: bold
+
+.h2, h2
+	font-size: 36px
+	line-height: 48px
+	font-weight: bold
+
+.h3, h3 
+	font-size: 28px
+	line-height: 35px
+	font-weight: bold
+
+ul
+	list-style-type: none
+
+a
+	color: $black
+	text-decoration: none
+	transition: all .3s ease
+	&:hover, &:focus
+		color: $green
+
+.menu
+	.list 
+		display: flex
+		align-items: center
+		gap: 24px
+		li
+			white-space: nowrap
+			a
+				color: $white
+				&:hover, &:focus
+					color: $accent
+
+.link
+	&--phone, &--mail, &--address
+		display: flex
+		align-items: center
+		gap: 10px
+		span
+			white-space: nowrap
+		svg
+			min-width: 14px
+			path
+				fill: $white
+				transition: all .3s ease
+		span
+			color: $white
+			transition: all .3s ease
+			line-height: 1.72
+		&:hover, &:focus 
+			svg
+				path
+					fill: $accent
+			span
+				color: $accent
+	&--address
+		align-items: flex-start
+		span
+			white-space: pre-wrap
+		svg
+			margin-top: 6px
+
+.exchangeRate
+	display: flex
+	align-items: center
+	gap: 20px
+	white-space: nowrap
+	&--item 
+		color: $white
+
+.top
+	background-color: $black
+	position: fixed
+	bottom: 26px
+	right: -100px
+	width: 60px
+	min-width: 60px
+	height: 60px
+	display: flex
+	align-items: center
+	justify-content: center
+	z-index: 99
+	opacity: 0
+	transition: right .3s ease, opacity .3s ease, background .3s ease
+	cursor: pointer
+	overflow: hidden
+	svg
+		width: 28px
+		height: 28px
+		position: relative
+		z-index: 2
+	path
+		fill: $white
+	&:hover 
+		background-color: $red
+	&.scroll 
+		right: 50px
+		opacity: 1
+
+button
+	outline: none
+	border: none
+	background-color: transparent
+	cursor: pointer
+	&:disabled
+		cursor: not-allowed
+
+.button
+	font-size: 16px
+	padding: 12.5px 17.5px
+	font-weight: 500
+	background-color: $accent
+	color: $black
+	transition: all .3s ease
+	white-space: nowrap
+	&--c03
+		color: #034460
+		font-weight: 600
+		font-size: 20px
+		line-height: 15px
+		padding: 25px 30px
+	&--bd 
+		border: 1px solid $accent
+		background-color: $white
+		font-weight: 600
+	&--icon
+		display: flex
+		align-items: center
+		gap: 10px
+		padding: 18px 25px
+		span
+			color: #486C70
+			font-weight: 600
+			font-size: 15px
+			line-height: 1
+	&:hover, &:focus 
+		background-color: transparentize($accent, .2)
+		color: $black
+
+.overlay
+	position: relative
+	&::before
+		content: ''
+		display: block
+		position: absolute
+		z-index: 0
+		background-image: $overlay
+		width: 100%
+		height: 100%
+		opacity: 0.6
+	&--wrapper 
+		position: relative
+		z-index: 1
+
+.subtitle
+	font-size: 18px
+	line-height: 23px
+
+form
+	.wpcf7-form-control-wrap
+		width: 100%
+		input, textarea
+			width: 100%
+	.wpcf7-not-valid-tip
+		text-align: right
+		padding-top: 5px
+		color: $red
+	.wpcf7-response-output
+		opacity: 0
+		visibility: hidden
+		position: absolute
+		z-index: -1
+		bottom: 0
+		left: 0
+	input, textarea
+		outline: none
+		background: $white
+		border: 0.5px solid $bdDE
+		padding: 18px
+		font-size: 14px
+		line-height: 1
+		color: $gray81 
+		transition: all .3s ease
+		&:focus-visible
+			border: 0.5px solid $green
+	label
+		a
+			display: inline-flex
+			color: $green
+			overflow: hidden
+			position: relative
+			transition: color .3s ease
+			&::before
+				content: ''
+				background-image: $gradient
+				position: absolute
+				bottom: 0
+				left: -100%
+				height: 2px
+				transition: left .3s ease
+				width: 100%
+			&:hover 
+				color: $accent
+				&::before
+					left: 0
+
+textarea
+	resize: none
+	max-height: 115px
+
+.form 
+	&--left 
+		display: flex
+		flex-direction: column
+		gap: 10px
+	&--right 
+		.title 
+			margin-bottom: 20px
+			font-size: 14px
+			line-height: 18px
+			font-weight: 600
+	&--check
+		.custom--check
+			position: initial
+			z-index: 1
+			opacity: 1
+			display: flex
+			flex-direction: column
+			gap: 4px
+		.wpcf7-list-item
+			margin-left: 0
+		input[type='checkbox']
+			position: absolute
+			z-index: -1
+			opacity: 0
+			max-width: fit-content
+			+ .wpcf7-list-item-label
+				display: inline-flex
+				align-items: center
+				user-select: none
+				cursor: pointer
+				transition: all .3s ease
+				&::before
+					content: ''
+					display: inline-block
+					width: 20px
+					height: 20px
+					flex-shrink: 0
+					flex-grow: 0
+					border: 1px solid $bdDE
+					margin-right: 8px
+					background-repeat: no-repeat
+					background-position: center center
+					background-size: 0px 0px
+					transition: all .3s ease
+					background-image: url('data:image/svg+xml,<svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.54961 13L0.849609 7.3L2.27461 5.875L6.54961 10.15L15.7246 0.974998L17.1496 2.4L6.54961 13Z" fill="#2E3C3C"/></svg>')
+			&:checked 
+				+ .wpcf7-list-item-label
+					&::before
+						background-size: 14px 9px
+						border-color: $black
+			&:not(:disabled)
+				&:not(:checked) 
+					+ .wpcf7-list-item-label
+						&:hover
+							&::before
+								border-color: $black
+				&:active
+					+ .wpcf7-list-item-label
+						&::before
+							border-color: $black
+	&--wrapper 
+		display: flex
+		gap: 45px
+		margin-bottom: 20px
+	&--block 
+		display: flex
+		gap: 35px
+		align-items: center
+		> span
+			font-size: 12px
+			line-height: 14.5px
+	&--send
+		display: flex
+		flex-direction: column
+		gap: 10px
+		label
+			font-size: 14px
+			font-weight: 600
+
+.custom--check
+	position: absolute
+	z-index: -1
+	opacity: 0
+	+ label 
+		display: inline-flex
+		align-items: center
+		user-select: none
+		cursor: pointer
+		transition: all .3s ease
+		&::before
+			content: ''
+			display: inline-block
+			width: 23px
+			height: 23px
+			flex-shrink: 0
+			flex-grow: 0
+			border: 2px solid $white
+			border-radius: 4px
+			margin-right: 8px
+			background-repeat: no-repeat
+			background-position: center center
+			background-size: 0px 0px
+			transition: all .3s ease
+	&:checked 
+		+ label
+			&::before
+				background-size: 14px 9px
+				border-color: $white
+				background-image: url('data:image/svg+xml,<svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.54961 13L0.849609 7.3L2.27461 5.875L6.54961 10.15L15.7246 0.974998L17.1496 2.4L6.54961 13Z" fill="white"/></svg>')
+	&:not(:disabled)
+		&:not(:checked) 
+			+ label
+				&:hover
+					&::before
+						border-color: $white
+		&:active
+			+ label
+				&::before
+					border-color: $white
+
+table
+	th, td 
+		border: 1px solid $black
+		padding: 10px 20px
+	th
+		margin-right: 10px
+	
+.burger 
+	min-width: 20px
+	width: 20px
+	max-width: 20px
+	height: 20px
+	position: relative
+	display: none
+	span
+		display: flex
+		width: 100%
+		height: 2px
+		background-color: $white
+		border-radius: 2px
+		display: flex
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		transition: all .3s ease
+		&:nth-of-type(2)
+			top: calc(50% - 8px)
+		&:last-of-type
+			top: calc(50% + 8px)
+	&.active 
+		span
+			&:first-of-type
+				top: 50%
+				transform: translate(-50%) rotate(45deg)
+			&:nth-of-type(2)
+				opacity: 0
+				top: -5px
+			&:last-of-type
+				top: 50%
+				transform: translate(-50%) rotate(-45deg)
+
+.page
+	&--wrapper
+		margin-top: 203px
+
+
+.header
+	box-shadow: $shadow000
+	position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	z-index: 98
+	&--logo 
+		display: flex
+		max-width: 182px
+		&:hover 
+			opacity: 0.6
+	&--top
+		display: flex
+		align-items: center
+		background-image: $gradient
+		padding-top: 20px
+		padding-bottom: 20px
+		&__wrapper
+			display: flex
+			align-items: center
+			justify-content: space-between
+			gap: 35px
+	&--language 
+		display: flex
+		gap: 10px
+		align-items: center
+		.lang-item
+			a
+				display: flex
+				svg
+					width: 25px
+					height: 25px
+					border-radius: 50%
+					overflow: hidden
+					border: 1px solid transparentize($accent, 1)
+					transition: all .3s ease
+				&:hover 
+					svg
+						border: 1px solid $accent
+	&--bottom
+		padding-top: 15px
+		padding-bottom: 15px
+		background-color: $white
+	&--services 
+		.swiper-wrapper
+			// justify-content: space-between
+	&--item 
+		margin-right: 50px
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: center
+		gap: 10px
+		text-align: center
+		font-weight: 600
+		font-size: 14px
+		line-height: 17px
+		max-width: fit-content
+		min-width: 110px
+		user-select: none
+		.icon
+			display: flex
+			min-width: 40px
+			width: 45px
+			max-width: 45px
+			height: 45px
+			transition: all .3s ease
+		span
+			transition: all .3s ease
+			min-height: 34px
+			display: flex
+			justify-content: center
+			align-items: center
+			color: $black2A
+		&:hover
+			.icon
+				transform: scale(1.05)
+			span
+				color: $green
+		
+.main
+	&--header 
+		min-height: 615px
+		width: 100%
+		display: flex
+		align-items: center
+		justify-content: flex-start
+		background-size: cover
+		background-repeat: no-repeat
+		background-position: top center
+		&__wrapper 
+			color: $white
+			width: 100%
+			.h1
+				&:not(:last-child)
+					margin-bottom: 25px
+			.subtitle
+				&:not(:last-child)
+					margin-bottom: 40px
+	&--format
+		> .title
+			&:not(:last-child)
+				margin-bottom: 105px
+			.h2
+				color: $green
+		&__block 
+			min-height: 460px
+			background-repeat: no-repeat
+			background-size: cover
+		&__wrapper 
+			display: flex
+			justify-content: space-between
+			gap: 65px
+		&__item
+			flex: 1 1 calc(50% - 65px)
+			background-color: $white
+			transform: translateY(-40px)
+			box-shadow: 0px 5px 30px 0px #131B221F
+			border-bottom: 10px solid #486C70
+			padding: 50px 40px 40px
+			.title 
+				display: flex
+				gap: 20px
+				align-items: center
+				&:not(:last-child)
+					margin-bottom: 30px
+			.list
+				display: flex
+				flex-direction: column
+				gap: 10px
+				&:not(:last-child)
+					margin-bottom: 10px
+				li
+					display: flex
+					align-items: center
+					gap: 10px
+					color: $gray
+					font-size: 18px
+					&::before
+						content: ''
+						display: block
+						width: 10px
+						height: 10px
+						border-radius: 50%
+						background-color: $accent
+			.button 
+				margin-left: auto
+				width: fit-content
+				display: flex
+				justify-content: flex-end
+	&--competitions 
+		.h2
+			&:not(:last-child)
+				margin-bottom: 54px
+		&__wrapper
+			display: flex
+			flex-wrap: wrap
+			gap: 30px
+		&__item 
+			background-color: $green
+			padding: 25px
+			flex: 1 1 calc(33% - 30px)
+			max-width: 32.3%
+			.title 
+				color: $lightGray
+				font-weight: 600
+				font-size: 24px
+				line-height: 28px
+				&:not(:last-child)
+					margin-bottom: 30px
+			.block 
+				height: 225px
+				position: relative
+				transition: filter .3s ease
+				overflow: hidden
+				> div 
+					position: relative
+					z-index: 1
+					opacity: 0
+					transition: opacity .3s ease
+					padding: 30px 40px
+					&::before
+						content: ''
+						display: block
+						position: absolute
+						top: 0
+						left: 0
+						width: 100%
+						min-height: 100%
+						opacity: 0
+						background: $white
+						transition: opacity .3s ease
+					> *
+						position: relative
+						z-index: 1
+						font-size: 18px
+						line-height: 21px
+						font-weight: 500
+						&:not(:last-child)
+							margin-bottom: 20px
+			&:hover 
+				.block
+					overflow-y: auto
+					overflow-x: hidden
+					scrollbar-width: none
+					// scrollbar-width: thin
+					// scrollbar-color: $green $black
+					filter: grayscale(1)
+					&::-webkit-scrollbar
+						display: none
+					> div 
+						opacity: 1
+						&::before
+							opacity: 0.8
+	&--directions 
+		background-color: $bgF1
+		padding-top: 110px
+		padding-bottom: 190px
+		.h2
+			&:not(:last-child)
+				margin-bottom: 10px
+		.subtitle
+			font-size: 20px
+			line-height: 28px
+			color: $gray
+		.map
+			transform: translate(-70px, -20px)
+	&--form 
+		max-height: 566px
+		&.section
+			margin-top: -100px
+		.container
+			max-height: 566px
+			.row
+				max-height: 566px
+		&__wrapper 
+			display: flex
+			justify-content: space-between
+			gap: 50px
+			box-shadow: 0px 10px 42px 0px #0109140F
+			background-color: $white
+			transform: translateY(-245px)
+		&__left 
+			max-width: 827px
+			padding-top: 80px
+			padding-bottom: 80px
+			padding-left: 65px
+			> .title 
+				display: flex
+				flex-direction: column
+				gap: 30px
+				span
+					color: $gray
+				&:not(:last-child)
+					margin-bottom: 75px
+				.h2
+					font-size: 48px
+					line-height: 52px
+				> span 
+					font-size: 16px
+					line-height: 1.65
+		&__right 
+			display: flex
+		&__name 
+			padding-left: 25px
+			padding-right: 25px
+			margin: 0 auto
+			max-width: 1860px
+
+.footer
+	background-color: $black2A
+	margin-top: 200px
+	padding-top: 45px
+	padding-bottom: 30px
+	&--wrapper 
+		display: flex
+		flex-direction: column
+		gap: 10px
+		color: $white
+		li
+			font-size: 14px
+			line-height: 20px
+			align-self: center
+		a
+			color: $white
+			&:hover 
+				color: $accent
+		.title
+			font-size: 20px
+			line-height: 24px
+			font-weight: 600
+	&--top 
+		display: flex
+		gap: 50px
+	&--siteSections
+		max-width: 345px
+		.title 
+			&:not(:last-child)
+				margin-bottom: 10px
+		.list 
+			display: flex
+			flex-wrap: wrap
+			gap: 10px 4px
+			li
+				flex: 1 1 calc(50% - 4px)
+	&--logo
+		max-width: 345px
+		display: flex
+		&:not(:last-child)
+			margin-bottom: 75px
+		&:hover 
+			opacity: 0.6
+	&--right 
+		display: flex
+		gap: 50px
+		.title 
+			display: flex
+			align-items: center
+			gap: 5px
+			&:not(:last-child)
+				margin-bottom: 30px
+	&--services 
+		max-width: 218px
+		width: 100%
+		.title 
+			display: flex
+			align-items: center
+			gap: 5px
+			&:not(:last-child)
+				margin-bottom: 30px
+		.list
+			display: flex
+			flex-direction: column
+			gap: 10px
+			li
+				align-self: flex-start
+	&--branches 
+		max-width: 230px
+		width: 100%
+		.list 
+			display: flex
+			flex-direction: column
+			gap: 15px
+			li
+				align-self: flex-start
+	&--bottom 
+		display: flex
+		gap: 50px
+		justify-content: space-between
+		align-items: flex-end
+		&__left 
+			display: flex
+			gap: 50px
+			justify-content: space-between
+		&__right 
+			> span 
+				display: block
+				margin-bottom: 20px
+			form 
+				display: flex
+				align-items: flex-end
+				gap: 28px
+				.form--send 
+					flex: 1 1 calc(65% - 28px)
+					input 
+						padding: 16px
+				.button
+					flex: 1 1 calc(35% - 28px)
+
+.modal
+	position: fixed
+	top: 0
+	bottom: 0
+	left: 0
+	right: 0
+	z-index: -1
+	opacity: 0
+	width: 100vw
+	height: 100vh
+	transition: opacity .3s ease, z-index .3s ease
+	display: flex
+	align-items: center
+	justify-content: center
+	background: radial-gradient(50% 50% at 50% 50%, rgba(7, 15, 36, .4) 0, rgba(7, 15, 36, .445) 100%)
+	backdrop-filter: blur(5px)
+	&--wrapper
+		display: flex
+		flex-direction: column
+		padding: 80px 40px
+		max-width: 945px
+		width: 100%
+		height: fit-content
+		background-color: $white
+		position: relative
+		z-index: 1
+		transform: scale(0)
+		transition: transform .3s ease
+		> .title
+			display: flex
+			flex-direction: column
+			gap: 30px
+			margin-bottom: 75px
+			.h2
+				font-size: 48px
+				line-height: 52px
+				font-weight: 600
+			span 
+				color: $gray
+				line-height: 28px
+	&--close 
+		position: absolute
+		cursor: pointer
+		top: 90px
+		right: 40px
+		width: 30px
+		min-width: 30px
+		height: 30px
+		svg
+			width: 100%
+			height: 100%
+		path 
+			transition: stroke .3s ease
+			stroke: $black
+		&:hover 
+			path
+				stroke: $green
+	&--calculation
+		.modal
+			&--wrapper 
+				max-width: 666px
+				padding-top: 50px
+				padding-bottom: 90px
+				.title 
+					margin-bottom: 50px
+			&--close 
+				top: 60px
+		.form--wrapper
+			flex-direction: column
+			gap: 10px
+	&--send 
+		.modal
+			&--wrapper
+				padding: 75px 70px
+				.h1, .h2
+					text-align: center
+			&--close 
+				path 
+					stroke: $white
+		&.active 
+			z-index: 10000
+	&.active 
+		display: flex
+		z-index: 9999
+		opacity: 1
+		.modal--wrapper
+			transform: scale(1)
+	&--menu 
+		flex-direction: column
+		align-items: flex-start
+		justify-content: flex-start
+		padding-left: 20px
+		padding-right: 20px
+		padding-bottom: 70px
+		transition: all 0s ease
+		&__header 
+			width: 100%
+			display: flex
+			gap: 35px
+			background-color: $bgF1
+			border-bottom: 1px solid $bgD6
+			margin-left: -20px
+			margin-right: -20px
+			padding-left: 20px
+			padding-right: 20px
+			width: 100vw
+			.button
+				margin-right: auto
+			.burger
+				span
+					background-color: $black
+					&:first-of-type
+						top: 50%
+						transform: translate(-50%) rotate(45deg)
+					&:nth-of-type(2)
+						opacity: 0
+						top: -5px
+					&:last-of-type
+						top: 50%
+						transform: translate(-50%) rotate(-45deg)
+		&__list 
+			padding-top: 15px
+			padding-bottom: 30px
+			display: flex
+			flex-direction: column
+			overflow-x: hidden
+			overflow-y: auto
+			scrollbar-width: none
+			&::-webkit-scrollbar
+				display: none
+			.exchangeRate
+				margin-left: auto
+				&:not(:last-child)
+					margin-bottom: 23px
+				&--item 
+					color: $black
+					font-weight: 600
+					span
+						font-weight: 400
+			.menu 
+				&:not(:last-child)
+					margin-bottom: 50px
+				.list 
+					flex-direction: column
+					justify-content: flex-start
+					align-items: flex-start
+					gap: 20px
+					li 
+						a
+							color: $black
+			.list
+				.link
+					&--address, &--mail, &--phone
+						svg 
+							path 
+								fill: $accent
+						span
+							color: $black
+		&__services 
+			display: flex
+			flex-wrap: wrap
+			gap: 25px 10px
+			&:not(:last-child)
+				margin-bottom: 60px
+			.title 
+				font-weight: 600
+				flex: 100%
+		&__item 
+			flex: 1 1 calc(33% - 10px)
+			display: flex
+			flex-direction: column
+			align-items: center
+			justify-content: center
+			gap: 10px
+			text-align: center
+			span
+				font-weight: 600
+		&.open 
+			display: flex
+			opacity: 1
+			z-index: 99
+			background: $white
+			color: $black
+		
+
+
+@import "media"
