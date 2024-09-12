@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					slidesPerView: "auto",
 				},
 				1280: {
-					spaceBetween: 20,
+					spaceBetween: 25,
 					slidesPerView: "auto",
 				},
 				1300: {
