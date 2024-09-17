@@ -29,43 +29,38 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	top.addEventListener('click', scrollToTop);
 
-	const width = window.innerWidth;
-	// if (width >= 480){
-	// 	new Swiper(".header--services", {
-	// 		slidesPerView: 9,
-	// 		spaceBetween: 50,
-	// 		breakpoints: {
-	// 			480: {
-	// 				slidesPerView: "auto",
-	// 				spaceBetween: 20,
-	// 			},
-	// 			830: {
-	// 				slidesPerView: "auto",
-	// 				spaceBetween: 30,
-	// 			},
-	// 			1024: {
-	// 				slidesPerView: "auto",
-	// 				spaceBetween: 15,
-	// 			},
-	// 			1200: {
-	// 				spaceBetween: 10,
-	// 				slidesPerView: 9,
-	// 			},
-	// 			1280: {
-	// 				spaceBetween: 25,
-	// 				slidesPerView: 9,
-	// 			},
-	// 			1300: {
-	// 				spaceBetween: 5,
-	// 				slidesPerView: 9,
-	// 			},
-	// 			1440: {
-	// 				spaceBetween: 50,
-	// 				slidesPerView: 9,
-	// 			},
-	// 		},
-	// 	});
-	// }
+	// Получаем все кнопки и тексты
+	const buttons = document.querySelectorAll('.information--info__buttons button');
+	const texts = document.querySelectorAll('.information--info__text');
+
+	// Убираем класс 'active' у всех элементов
+	function removeActiveClasses() {
+		buttons.forEach(button => button.classList.remove('active'));
+		texts.forEach(text => text.classList.remove('active'));
+	}
+
+	// Добавляем класс 'active' первой кнопке и тексту при загрузке страницы
+	function setInitialActive() {
+		if (buttons.length > 0 && texts.length > 0) {
+			buttons[0].classList.add('active');
+			texts[0].classList.add('active');
+		}
+	}
+
+	// Добавляем обработчики кликов для каждой кнопки
+	buttons.forEach((button, index) => {
+		button.addEventListener('click', () => {
+			// Удаляем классы 'active' у всех кнопок и текстов
+			removeActiveClasses();
+			
+			// Добавляем класс 'active' для текущей кнопки и текста
+			button.classList.add('active');
+			texts[index].classList.add('active');
+		});
+	});
+
+	// Устанавливаем активные классы при загрузке страницы
+	setInitialActive();
 
 	// Получаем элементы
 	const modalOpenButtons = document.querySelectorAll('.modal--open');
