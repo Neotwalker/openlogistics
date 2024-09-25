@@ -36,7 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Убираем класс 'active' у всех элементов
 	function removeActiveClasses() {
 		buttons.forEach(button => button.classList.remove('active'));
-		texts.forEach(text => text.classList.remove('active'));
+		texts.forEach(text => {
+			text.classList.remove('active');
+			text.classList.remove('animate__backInUp')
+		});
 	}
 
 	// Добавляем класс 'active' первой кнопке и тексту при загрузке страницы
@@ -44,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (buttons.length > 0 && texts.length > 0) {
 			buttons[0].classList.add('active');
 			texts[0].classList.add('active');
+			texts[0].classList.add('animate__backInUp');
 		}
 	}
 
@@ -56,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Добавляем класс 'active' для текущей кнопки и текста
 			button.classList.add('active');
 			texts[index].classList.add('active');
+			texts[index].classList.add('animate__backInUp');
 		});
 	});
 
