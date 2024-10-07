@@ -2,6 +2,20 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+	const swiper = new Swiper(".swiper", {
+		effect: 'fade',
+		autoHeight: true,
+		fadeEffect: {
+			crossFade: true, // Перекрестная анимация
+		},
+		autoplay: {
+			delay: 5000,
+			disableOnInteraction: false,
+		},
+		speed: 1000,
+		allowTouchMove: false,
+	});
+
 	const top = document.querySelector('.top');
 	const footer = document.querySelector('.footer');
 	window.addEventListener('scroll', function() {
